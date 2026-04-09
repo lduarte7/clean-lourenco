@@ -5,7 +5,7 @@ type TypographyVariant =
   | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" 
   | "body" | "body-small" | "caption" | "display";
 
-interface TypographyProps {
+interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TypographyVariant;
   className?: string;
   children: React.ReactNode;
@@ -30,11 +30,12 @@ export const Typography: React.FC<TypographyProps> = ({
   className,
   children,
   as,
+  ...props
 }) => {
   const Tag = as || (variant === "display" ? "h1" : variant === "caption" ? "span" : (variant.startsWith("h") ? (variant as React.ElementType) : "p"));
 
   return (
-    <Tag className={cn(variants[variant], className)}>
+    <Tag className={cn(variants[variant], className)} {...props}>
       {children}
     </Tag>
   );
