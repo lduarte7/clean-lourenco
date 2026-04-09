@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Manrope", sans-serif;
+
+  --color-clinical-blue: #001B3D;      /* Premium Navy */
+  --color-clinical-container: #002D66;
+  --color-clinical-red: #9E1B1B;       /* Crimson Premium */
+  --color-clinical-magenta: #7A1414;
+  --color-clinical-surface: #F8FAFC;   /* Soft Slate */
+  --color-clinical-on-surface: #0F172A; /* Rich Slate */
+
+  --animate-clinical-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-clinical-float: float 6s ease-in-out infinite;
+
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
+
+  --shadow-premium: 0 20px 50px -12px rgba(0, 27, 61, 0.12);
+  --shadow-premium-hover: 0 30px 60px -15px rgba(0, 27, 61, 0.2);
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+:root {
+  --background: var(--color-clinical-surface);
+  --foreground: var(--color-clinical-on-surface);
+}
+
+@layer base {
+  * {
+    @apply border-clinical-blue/5;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .section-spacing {
+    @apply py-32 md:py-48;
+  }
+  
+  /* Glassmorphism utility without 1px borders */
+  .glass-clinical {
+    @apply bg-white/5 backdrop-blur-xl transition-all duration-300;
+  }
+  
+  .glass-clinical-hover {
+    @apply hover:bg-white/10 hover:shadow-2xl hover:shadow-clinical-blue/10;
+  }
+}
